@@ -39,7 +39,7 @@ button {
     border-radius: 12px;
     cursor: pointer;
     position: relative;
-    transition: transform 0.1s, background-color 0.1s;
+    transition: transform 0.15s, background-color 0.15s;
 }
 
 button:hover {
@@ -177,34 +177,38 @@ closePopup.addEventListener("click", () => {
     popup.style.display = "none";
 });
 
-// NEJ-knap ekstremt drilsk
+// NEJ-knap sjovt drilsk, men indenfor skærmen
 const noBtn = document.getElementById("noBtn");
 let mouseX = 0, mouseY = 0;
 document.addEventListener("mousemove", e => { mouseX = e.clientX; mouseY = e.clientY; });
 
-// Konstant bevægelse mod musen + hop + farve + skalering
 setInterval(() => {
     const rect = noBtn.getBoundingClientRect();
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
 
-    // Afstand fra musen
-    const dx = mouseX - (rect.left + rect.width/2);
-    const dy = mouseY - (rect.top + rect.height/2);
+    // afstand fra musen
+    let dx = mouseX - (rect.left + rect.width/2);
+    let dy = mouseY - (rect.top + rect.height/2);
 
-    // Tilfældige offsets for hop
-    const offsetX = Math.random() * 300 - 150;
-    const offsetY = Math.random() * 200 - 100;
+    // hop og offset
+    const offsetX = Math.random() * 150 - 75;
+    const offsetY = Math.random() * 100 - 50;
 
-    // Bevæg knappen væk fra musen + hop
-    const moveX = -dx/1.5 + offsetX;
-    const moveY = -dy/1.5 + offsetY;
+    // bevæg knappen væk fra musen
+    let moveX = -dx/2 + offsetX;
+    let moveY = -dy/2 + offsetY;
 
-    // Skalering og farve
-    const scale = 1 + Math.random() * 1.5; // op til 2.5x
+    // begræns bevægelsen indenfor vinduet
+    moveX = Math.max(-rect.left, Math.min(moveX, windowWidth - rect.right));
+    moveY = Math.max(-rect.top, Math.min(moveY, windowHeight - rect.bottom));
+
+    const scale = 1 + Math.random(); // op til 2x
     const colors = ["#ff4da6","#ffb6c1","#ff69b4","#db7093","#ff1493"];
 
     noBtn.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
     noBtn.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-}, 80); // opdater hver 80ms for ekstrem drilskhed
+}, 160); // opdater hver 160ms
 </script>
 
 </body>
