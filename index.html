@@ -133,7 +133,7 @@ button:hover {
 
     <div class="buttons">
         <a href="ja.html"><button class="yes">JA</button></a>
-        <a href="nej.html"><button class="no">NEJ</button></a>
+        <a href="nej.html"><button class="no" id="noBtn">NEJ</button></a>
     </div>
 </div>
 
@@ -176,6 +176,17 @@ window.onload = () => {
 const closePopup = document.getElementById("closePopup");
 closePopup.addEventListener("click", () => {
     popup.style.display = "none";
+});
+
+// Drilsk NEJ-knap (ret drilsk)
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mousemove", () => {
+    const x = Math.random() * 250 - 125; // flytter sig hurtigt
+    const y = Math.random() * 100 - 50;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+noBtn.addEventListener("mouseout", () => {
+    noBtn.style.transform = `translate(0,0)`;
 });
 </script>
 
