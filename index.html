@@ -6,12 +6,13 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* Container styling */
 body {
     background-color: #ffd6e7;
     font-family: Arial, sans-serif;
     text-align: center;
     overflow-x: hidden;
+    margin:0;
+    padding:0;
 }
 
 .container {
@@ -57,42 +58,26 @@ button:hover {
 }
 
 /* Heart animation */
-.hearts, .stars, .balloons {
+.hearts {
     position: fixed;
-    top: 0;
-    left: 0;
+    top:0;
+    left:0;
     width: 100%;
     height: 100%;
     pointer-events: none;
     overflow: hidden;
 }
 
-.heart, .star, .balloon {
+.heart {
     position: absolute;
+    color: red;
     font-size: 25px;
     animation: fall linear forwards;
-}
-
-.star {
-    color: yellow;
-    font-size: 15px;
-}
-
-.balloon {
-    font-size: 35px;
-    animation: rise linear forwards;
 }
 
 @keyframes fall {
     to {
         transform: translateY(100vh);
-        opacity: 0;
-    }
-}
-
-@keyframes rise {
-    to {
-        transform: translateY(-120vh);
         opacity: 0;
     }
 }
@@ -112,8 +97,26 @@ button:hover {
     text-align: left;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
     animation: fadeIn 0.5s ease;
+    z-index: 1000;
 }
 
+.popup h2 {
+    margin-top:0;
+}
+
+.popup ol {
+    padding-left: 20px;
+}
+
+.close-btn {
+    position: absolute;
+    top:5px;
+    right:10px;
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* Fade-in animation */
 @keyframes fadeIn {
     from {opacity:0;}
     to {opacity:1;}
@@ -138,6 +141,7 @@ button:hover {
 
 <!-- Pop-up -->
 <div class="popup" id="popup">
+    <span class="close-btn" id="closePopup">×</span>
     <h2>5 grunde til jeg elsker dig ❤️</h2>
     <ol>
         <li>Du får mig altid til at smile især når du danser 😄</li>
@@ -149,11 +153,9 @@ button:hover {
 </div>
 
 <div class="hearts" id="hearts"></div>
-<div class="stars" id="stars"></div>
-<div class="balloons" id="balloons"></div>
 
 <script>
-// Hjertes animation
+// Hjerter
 const heartContainer = document.getElementById("hearts");
 function createHeart() {
     const heart = document.createElement("div");
@@ -166,39 +168,21 @@ function createHeart() {
 }
 setInterval(createHeart, 300);
 
-// Stjerne animation
-const starContainer = document.getElementById("stars");
-function createStar() {
-    const star = document.createElement("div");
-    star.classList.add("star");
-    star.innerHTML = "⭐";
-    star.style.left = Math.random() * 100 + "vw";
-    star.style.animationDuration = (2 + Math.random()*2) + "s";
-    starContainer.appendChild(star);
-    setTimeout(() => star.remove(), 5000);
-}
-setInterval(createStar, 400);
-
-// Balloner animation
-const balloonContainer = document.getElementById("balloons");
-function createBalloon() {
-    const balloon = document.createElement("div");
-    balloon.classList.add("balloon");
-    balloon.innerHTML = "🎈";
-    balloon.style.left = Math.random() * 100 + "vw";
-    balloon.style.animationDuration = (4 + Math.random()*3) + "s";
-    balloonContainer.appendChild(balloon);
-    setTimeout(() => balloon.remove(), 7000);
-}
-
-// JA knap pop-up
+// JA-knap åbner pop-up
 const yesBtn = document.getElementById("yesBtn");
+const popup = document.getElementById("popup");
+const closePopup = document.getElementById("closePopup");
+
 yesBtn.addEventListener("click", () => {
-    document.getElementById("popup").style.display = "block";
-    setInterval(createBalloon, 500);
+    popup.style.display = "block";
 });
 
-// Drilsk NEJ knap
+// Luk pop-up
+closePopup.addEventListener("click", () => {
+    popup.style.display = "none";
+});
+
+// Drilsk NEJ-knap
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", () => {
     const x = Math.random() * 150 - 75;
