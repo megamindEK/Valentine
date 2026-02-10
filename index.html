@@ -39,7 +39,7 @@ button {
     border-radius: 12px;
     cursor: pointer;
     position: relative;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
 button:hover {
@@ -133,7 +133,7 @@ button:hover {
 
     <div class="buttons">
         <a href="ja.html"><button class="yes">JA</button></a>
-        <button class="no" id="noBtn" onclick="location.href='nej.html'">NEJ</button>
+        <a href="nej.html"><button class="no" id="noBtn">NEJ</button></a>
     </div>
 </div>
 
@@ -181,12 +181,16 @@ closePopup.addEventListener("click", () => {
 // Drilsk NEJ-knap
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * 250 - 125; // flytter sig hurtigt horisontalt
-    const y = Math.random() * 120 - 60;  // flytter sig hurtigt vertikalt
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    const x = Math.random() * 250 - 125; // horisontal bevægelse
+    const y = Math.random() * 120 - 60;  // vertikal bevægelse
+    const colors = ["#ff4da6", "#ffb6c1", "#ff69b4", "#db7093", "#ff1493"];
+    const scale = 1 + Math.random() * 0.5; // bliver lidt større
+    noBtn.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+    noBtn.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 });
 noBtn.addEventListener("mouseout", () => {
-    noBtn.style.transform = `translate(0,0)`;
+    noBtn.style.transform = `translate(0,0) scale(1)`;
+    noBtn.style.backgroundColor = "#444";
 });
 </script>
 
