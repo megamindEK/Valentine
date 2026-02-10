@@ -4,12 +4,126 @@
 <meta charset="UTF-8">
 <title>Valentine ❤️</title>
 <link rel="stylesheet" href="style.css">
+
+<style>
+/* Container styling */
+body {
+    background-color: #ffd6e7;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+
+.collage {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    font-size: 20px;
+    padding: 15px 25px;
+    margin: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.yes {
+    background-color: #ff4da6;
+    color: white;
+}
+
+.no {
+    background-color: #444;
+    color: white;
+}
+
+/* Heart animation */
+.hearts, .stars, .balloons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart, .star, .balloon {
+    position: absolute;
+    font-size: 25px;
+    animation: fall linear forwards;
+}
+
+.star {
+    color: yellow;
+    font-size: 15px;
+}
+
+.balloon {
+    font-size: 35px;
+    animation: rise linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes rise {
+    to {
+        transform: translateY(-120vh);
+        opacity: 0;
+    }
+}
+
+/* Pop-up box */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff0f5;
+    border: 2px solid #ff4da6;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 400px;
+    display: none;
+    text-align: left;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
-
     <h1>Hej smukke Isabella 💗</h1>
     <h2>Nicolai vil gerne være din valentine</h2>
     <h3>Vil du acceptere hans anmodning?</h3>
@@ -17,11 +131,84 @@
     <img src="images/collage.jpg" class="collage">
 
     <div class="buttons">
-        <a href="ja.html"><button class="yes">JA</button></a>
-        <a href="nej.html"><button class="no">NEJ</button></a>
+        <button class="yes" id="yesBtn">JA</button>
+        <button class="no" id="noBtn">NEJ</button>
     </div>
-
 </div>
+
+<!-- Pop-up -->
+<div class="popup" id="popup">
+    <h2>5 grunde til jeg elsker dig ❤️</h2>
+    <ol>
+        <li>Du får mig altid til at smile især når du danser 😄</li>
+        <li>Du er virkelig klog, og god i skolen.</li>
+        <li>Du er barmhjertig og viser så meget omsorg for andre</li>
+        <li>Du er mine allerbedste minder</li>
+        <li>Og selvfølgelig… du er virkelig smuk ❤️</li>
+    </ol>
+</div>
+
+<div class="hearts" id="hearts"></div>
+<div class="stars" id="stars"></div>
+<div class="balloons" id="balloons"></div>
+
+<script>
+// Hjertes animation
+const heartContainer = document.getElementById("hearts");
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random()*3) + "s";
+    heartContainer.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 300);
+
+// Stjerne animation
+const starContainer = document.getElementById("stars");
+function createStar() {
+    const star = document.createElement("div");
+    star.classList.add("star");
+    star.innerHTML = "⭐";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.animationDuration = (2 + Math.random()*2) + "s";
+    starContainer.appendChild(star);
+    setTimeout(() => star.remove(), 5000);
+}
+setInterval(createStar, 400);
+
+// Balloner animation
+const balloonContainer = document.getElementById("balloons");
+function createBalloon() {
+    const balloon = document.createElement("div");
+    balloon.classList.add("balloon");
+    balloon.innerHTML = "🎈";
+    balloon.style.left = Math.random() * 100 + "vw";
+    balloon.style.animationDuration = (4 + Math.random()*3) + "s";
+    balloonContainer.appendChild(balloon);
+    setTimeout(() => balloon.remove(), 7000);
+}
+
+// JA knap pop-up
+const yesBtn = document.getElementById("yesBtn");
+yesBtn.addEventListener("click", () => {
+    document.getElementById("popup").style.display = "block";
+    setInterval(createBalloon, 500);
+});
+
+// Drilsk NEJ knap
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 150 - 75;
+    const y = Math.random() * 50 - 25;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+noBtn.addEventListener("mouseout", () => {
+    noBtn.style.transform = `translate(0,0)`;
+});
+</script>
 
 </body>
 </html>
