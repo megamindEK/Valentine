@@ -177,15 +177,17 @@ closePopup.addEventListener("click", () => {
     popup.style.display = "none";
 });
 
-// Ultra-drilske NEJ-knap (dobbelt svær)
+// NEJ-knap ultra drilsk (4x svær)
 const noBtn = document.getElementById("noBtn");
+let mouseX = 0, mouseY = 0;
+document.addEventListener("mousemove", e => { mouseX = e.clientX; mouseY = e.clientY; });
 
-// Når musen går over knappen – længere hop, større skalering
+// Når musen går over knappen – langt hop + skalering + farve
 noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * 600 - 300; // -300 til +300 px
-    const y = Math.random() * 400 - 200; // -200 til +200 px
+    const x = Math.random() * 800 - 400; // -400 til +400 px
+    const y = Math.random() * 500 - 250; // -250 til +250 px
     const colors = ["#ff4da6", "#ffb6c1", "#ff69b4", "#db7093", "#ff1493"];
-    const scale = 1 + Math.random() * 1; // mellem 1 og 2 gange større
+    const scale = 1 + Math.random() * 1.5; // op til 2.5x
     noBtn.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
     noBtn.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 });
@@ -196,14 +198,18 @@ noBtn.addEventListener("mouseout", () => {
     noBtn.style.backgroundColor = "#444";
 });
 
-// Knappen "svæver" og ændrer farve hele tiden
+// Små løbende bevægelser og farveskift
 setInterval(() => {
-    const x = Math.random() * 40 - 20; // små bevægelser horisontalt
-    const y = Math.random() * 20 - 10; // små bevægelser vertikalt
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    const offsetX = Math.random() * 60 - 30;
+    const offsetY = Math.random() * 40 - 20;
     const colors = ["#ff4da6", "#ffb6c1", "#ff69b4", "#db7093", "#ff1493"];
+    const scale = 1 + Math.random() * 1.2; // ekstra skalering
+    // bevæg mod musen + små tilfældige hop
+    const dx = (mouseX - noBtn.getBoundingClientRect().left - noBtn.offsetWidth/2)/5;
+    const dy = (mouseY - noBtn.getBoundingClientRect().top - noBtn.offsetHeight/2)/5;
+    noBtn.style.transform = `translate(${dx+offsetX}px, ${dy+offsetY}px) scale(${scale})`;
     noBtn.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-}, 250);
+}, 150);
 </script>
 
 </body>
