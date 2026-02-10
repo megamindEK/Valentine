@@ -127,7 +127,7 @@ button:hover {
 <div class="container">
     <h1>Hej smukke Isabella 💗</h1>
     <h2>Jeg vil gerne være din valentine</h2>
-    <h3>Selvom du alleredde har spurgt mig først så prøv at sig nej :)?</h3>
+    <h3>Selvom du allerede har spurgt mig først så prøv at sig nej :)?</h3>
 
     <img src="images/collage.jpg" class="collage">
 
@@ -178,24 +178,34 @@ closePopup.addEventListener("click", () => {
     popup.style.display = "none";
 });
 
-// Drilsk NEJ-knap
+// Ultra-drilske NEJ-knap
 const noBtn = document.getElementById("noBtn");
+
+// Når musen går over knappen – stor bevægelse + farve + skalering
 noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * 250 - 125; // horisontal bevægelse
-    const y = Math.random() * 120 - 60;  // vertikal bevægelse
+    const x = Math.random() * 400 - 200; // -200 til +200 px
+    const y = Math.random() * 200 - 100; // -100 til +100 px
     const colors = ["#ff4da6", "#ffb6c1", "#ff69b4", "#db7093", "#ff1493"];
-    const scale = 1 + Math.random() * 0.5; // bliver lidt større
+    const scale = 1 + Math.random() * 0.7; // mellem 1 og 1.7 gange større
     noBtn.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
     noBtn.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 });
+
+// Nulstil når musen forlader
 noBtn.addEventListener("mouseout", () => {
     noBtn.style.transform = `translate(0,0) scale(1)`;
     noBtn.style.backgroundColor = "#444";
 });
+
+// Små løbende “svævende” bevægelser + farveskift
+setInterval(() => {
+    const x = Math.random() * 20 - 10; // små bevægelser horisontalt
+    const y = Math.random() * 10 - 5;  // små bevægelser vertikalt
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    const colors = ["#ff4da6", "#ffb6c1", "#ff69b4", "#db7093", "#ff1493"];
+    noBtn.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+}, 400);
 </script>
 
 </body>
 </html>
-
-
-
