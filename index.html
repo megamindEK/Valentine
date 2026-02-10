@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Valentine ❤️</title>
-<link rel="stylesheet" href="style.css">
 
 <style>
 body {
@@ -57,7 +56,7 @@ button:hover {
     color: white;
 }
 
-/* Heart animation */
+/* Hjerter */
 .hearts {
     position: fixed;
     top:0;
@@ -85,19 +84,18 @@ button:hover {
 /* Pop-up box */
 .popup {
     position: fixed;
-    top: 50%;
+    top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     background: #fff0f5;
     border: 2px solid #ff4da6;
     padding: 20px;
     border-radius: 15px;
     max-width: 400px;
-    display: none;
     text-align: left;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    animation: fadeIn 0.5s ease;
     z-index: 1000;
+    animation: fadeIn 0.5s ease;
 }
 
 .popup h2 {
@@ -134,12 +132,12 @@ button:hover {
     <img src="images/collage.jpg" class="collage">
 
     <div class="buttons">
-        <button class="yes" id="yesBtn">JA</button>
-        <button class="no" id="noBtn">NEJ</button>
+        <a href="ja.html"><button class="yes">JA</button></a>
+        <a href="nej.html"><button class="no">NEJ</button></a>
     </div>
 </div>
 
-<!-- Pop-up -->
+<!-- Pop-up sød note -->
 <div class="popup" id="popup">
     <span class="close-btn" id="closePopup">×</span>
     <h2>5 grunde til jeg elsker dig ❤️</h2>
@@ -168,29 +166,16 @@ function createHeart() {
 }
 setInterval(createHeart, 300);
 
-// JA-knap åbner pop-up
-const yesBtn = document.getElementById("yesBtn");
+// Pop-up vises med det samme
 const popup = document.getElementById("popup");
-const closePopup = document.getElementById("closePopup");
-
-yesBtn.addEventListener("click", () => {
+window.onload = () => {
     popup.style.display = "block";
-});
+}
 
 // Luk pop-up
+const closePopup = document.getElementById("closePopup");
 closePopup.addEventListener("click", () => {
     popup.style.display = "none";
-});
-
-// Drilsk NEJ-knap
-const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * 150 - 75;
-    const y = Math.random() * 50 - 25;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-});
-noBtn.addEventListener("mouseout", () => {
-    noBtn.style.transform = `translate(0,0)`;
 });
 </script>
 
