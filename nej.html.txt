@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<title>Forkert svar</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <h1>øv bøv</h1>
+    <h2>nej er ikke en mulighed :(</h2>
+
+    <img src="images/nej.jpg" class="single">
+
+    <br><br>
+    <a href="index.html"><button class="yes">Prøv igen 😌</button></a>
+</div>
+
+</body>
+</html>
